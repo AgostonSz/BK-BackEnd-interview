@@ -41,6 +41,7 @@ class Post(BaseModel):
 
 
 # Define the endpoints for CRUD operations
+# Create Post
 @app.post("/posts")
 def create_post(post: Post = Depends(), files: List[UploadFile] = {}):
     email = authenticate()
@@ -69,14 +70,14 @@ def create_post(post: Post = Depends(), files: List[UploadFile] = {}):
     post['_id'] = str(post['_id']) # fixes TypeError('vars() argument must have __dict__ attribute')] with fastAPI and mongoDB    
     return post
 
-
+# Return all posts
 @app.get("/posts")
 async def get_post_by_id():
     posts = collection.find({})
     post_ids = [str(post['_id']) for post in posts] # fixes TypeError('vars() argument must have __dict__ attribute')] with fastAPI and mongoDB
     return post_ids
 
-
+# Return 1 post by id
 @app.get("/posts/{post_id}")
 async def get_post_by_id(post_id: str):
     post = collection.find_one({'_id': ObjectId(post_id)})
@@ -86,7 +87,7 @@ async def get_post_by_id(post_id: str):
     post['_id'] = str(post['_id']) # fixes TypeError('vars() argument must have __dict__ attribute')] with fastAPI and mongoDB
     return post
 
-
+# Update 1 post by id
 @app.put("/posts/{post_id}")
 async def update_post(post_id: str, post: Post = Depends(), files: List[UploadFile] = {}):
     post = post.dict()
@@ -132,7 +133,7 @@ async def update_post(post_id: str, post: Post = Depends(), files: List[UploadFi
     collection.update_one({'_id': ObjectId(post_id)}, {'$set': post})
     return post
 
-
+# Delete 1 post by id
 @app.delete("/posts/{post_id}")
 async def delete_post_by_id(post_id: str):
     email = authenticate()
