@@ -1,0 +1,12 @@
+fastapi==0.103.2
+uvicorn==0.23.2
+requests==2.31.0
+oauthlib==3.2.2
+google-auth-oauthlib==1.1.0
+google-api-python-client==2.102.0
+authlib==1.2.1
+httpx==0.25.0
+pymongo==4.5.0
+python_multipart==0.0.6
+
+
