@@ -20,6 +20,7 @@ Elindítja a szervert a következő endpointokkal:
 * Update: /posts/id
 * Delete /posts/id
 
+Első alkalommal google fiókkal történő authentikáció szükséges, a token a ```token.json``` fileba kerül elmentésre, és később onnan automatikusan authentikálja a felhasználót.
 
 ## Tesztek:
 ```
