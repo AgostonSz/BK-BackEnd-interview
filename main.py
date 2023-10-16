@@ -17,9 +17,12 @@ from authentication import authenticate
 app = FastAPI()
 
 # MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(f"mongodb://admin:password@mongo:27017/")
 db = client['database']
 collection = db['posts']
+
+result = collection.insert_one({'test': 'test'})
+
 fs = gridfs.GridFS(db)
 try:
     client.admin.command('ismaster')
@@ -27,7 +30,7 @@ try:
 except Exception as e:
     print('Connection unsuccessful:', e)
 
-IP = '127.0.0.1'
+IP = '0.0.0.0'
 PORT = 8000
 
 
